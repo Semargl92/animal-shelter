@@ -43,7 +43,10 @@ public class AnimalService {
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = SQLException.class)
     public void deleteAnimal(Long id) {
-        animalRepository.deleteById(id);
+        Animal animal = findOneAnimal(id);
+        animal.setKennel(null);
+        animalRepository.save(animal);
+        animalRepository.delete(animal);
     }
 
     public Animal createAnimal(AnimalRequest animalRequest) {

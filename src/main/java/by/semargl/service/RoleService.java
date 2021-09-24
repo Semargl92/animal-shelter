@@ -1,11 +1,13 @@
 package by.semargl.service;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,8 +26,8 @@ public class RoleService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
 
-    public List<Role> findAllRole() {
-        return roleRepository.findAll();
+    public Page<Role> findAllRole() {
+        return roleRepository.findAll(PageRequest.of(1, 10, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public Role findOneRole(Long id) {
