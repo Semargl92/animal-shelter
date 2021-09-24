@@ -64,7 +64,7 @@ public class Animal {
     @ManyToOne
     @JoinColumn(name = "patron_id")
     @JsonBackReference
-    private User user;
+    private User patron;
 
     @OneToOne(mappedBy = "animal_id", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JsonManagedReference
