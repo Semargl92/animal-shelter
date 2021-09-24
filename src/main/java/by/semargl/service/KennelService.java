@@ -25,7 +25,7 @@ public class KennelService {
     private final KennelMapper kennelMapper;
 
     public Page<Kennel> findAllKennel() {
-        return kennelRepository.findAll(PageRequest.of(1, 10, Sort.by(Sort.Direction.ASC, "id")));
+        return kennelRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public Kennel findOneKennel(Long id) {

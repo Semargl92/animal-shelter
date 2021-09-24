@@ -66,7 +66,7 @@ public class Animal {
     @JsonBackReference
     private User patron;
 
-    @OneToOne(mappedBy = "animal_id", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "animal", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JsonManagedReference
     private Kennel kennel;
 }

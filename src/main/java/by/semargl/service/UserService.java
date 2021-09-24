@@ -35,7 +35,7 @@ public class UserService {
     private final UserCreateMapper userCreateMapper;
 
     public Page<User> findAllUsersWithCredentials() {
-        return userRepository.findAll(PageRequest.of(1, 10, Sort.by(Sort.Direction.ASC, "id")));
+        return userRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public List<UserRequest> findAllUsersWithLogin() {

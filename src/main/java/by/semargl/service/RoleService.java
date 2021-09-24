@@ -27,7 +27,7 @@ public class RoleService {
     private final UserRepository userRepository;
 
     public Page<Role> findAllRole() {
-        return roleRepository.findAll(PageRequest.of(1, 10, Sort.by(Sort.Direction.ASC, "id")));
+        return roleRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public Role findOneRole(Long id) {

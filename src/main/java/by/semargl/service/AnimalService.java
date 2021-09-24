@@ -33,7 +33,7 @@ public class AnimalService {
     private final AnimalMapper animalMapper;
 
     public Page<Animal> findAllAnimals() {
-        return animalRepository.findAll(PageRequest.of(1, 10, Sort.by(Sort.Direction.ASC, "id")));
+        return animalRepository.findAll(PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "id")));
     }
 
     public Animal findOneAnimal(Long id) {

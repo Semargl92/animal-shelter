@@ -18,8 +18,8 @@ values  (8, 'Sakura', 'Haruno', 'notUselessAtAll', 'FEMALE', '1997-12-11', 'pink
         (15, 'Varvara', 'Smirnova', 'starly', 'FEMALE', '1990-08-09', 'bad_girl');
 
 insert into public.roles (id, role_name)
-values  (1, 'ADMIN'),
-        (2, 'USER');
+values  (1, 'ROLE_ADMIN'),
+        (2, 'ROLE_USER');
 
 insert into public.user_roles (id, role_id, user_id)
 values  (1, 1, 1),
