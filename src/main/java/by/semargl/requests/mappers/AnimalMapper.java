@@ -12,5 +12,5 @@ import by.semargl.requests.AnimalRequest;
 public interface AnimalMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateStudentFromStudentRequest(AnimalRequest animalRequest, @MappingTarget Animal animal);
+    void updateAnimalFromAnimalRequest(AnimalRequest animalRequest, @MappingTarget Animal animal);
 }
