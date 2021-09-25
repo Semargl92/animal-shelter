@@ -57,16 +57,13 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = SQLException.class)
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = SQLException.class)
-    public void deleteUserWithOrphans(Long id) {
         User user = findOneUserWithCredentials(id);
         List<Animal> animals = animalRepository.findByPatron(user);
-        for (Animal animal : animals) {
-            animal.setPatron(null);
-            animalRepository.save(animal);
+        if (!animals.isEmpty()) {
+            for (Animal animal : animals) {
+                animal.setPatron(null);
+                animalRepository.save(animal);
+            }
         }
         userRepository.delete(user);
     }

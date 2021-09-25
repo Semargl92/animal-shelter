@@ -60,7 +60,7 @@ public class User {
     })
     private Credentials credentials;
 
-    @OneToMany(mappedBy = "patron", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patron", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Animal> animals = Collections.emptySet();
 

@@ -11,13 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import by.semargl.domain.Animal;
@@ -105,7 +103,7 @@ public class AnimalController {
         return animalService.updateAnimal(id, animalRequest);
     }
 
-    @ApiOperation(value = "find all students for patron")
+    @ApiOperation(value = "find all animals for patron")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "patronId", dataType = "string", paramType = "path",
                     value = "id of patron for search", required = true),
@@ -119,24 +117,5 @@ public class AnimalController {
     @GetMapping("/for_patron/{patronId}")
     public List<Animal> findAllAnimalsForPatron(@PathVariable("patronId") Long id) {
         return animalService.findAnimalsByPatronId(id);
-    }
-
-    @ApiOperation(value = "update animals kennel")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "animalId", dataType = "string", paramType = "query",
-                    value = "id of animal for update", required = true),
-            @ApiImplicitParam(name = "kennelId", dataType = "string", paramType = "query",
-                    value = "id of kennel for update", required = true),
-            @ApiImplicitParam(name = "X-Auth-Token", value = "token", required = true,
-                    dataType = "string", paramType = "header")
-    })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Animal's kennel was successfully updated"),
-            @ApiResponse(code = 500, message = "There are no animals or kennels for such id")
-    })
-    @PatchMapping("/admin/update_kennel")
-    public Animal updateAnimalsKennel(@RequestParam Long animalId, @RequestParam Long kennelId) {
-        animalService.updateAnimalsKennel(animalId, kennelId);
-        return animalService.findOneAnimal(animalId);
     }
 }

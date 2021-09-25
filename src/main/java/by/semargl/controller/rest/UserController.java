@@ -106,22 +106,6 @@ public class UserController {
     }
 
 
-    @ApiOperation(value = "remove patron")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userId", dataType = "string", paramType = "path",
-                    value = "id of patron for deleting from database", required = true),
-            @ApiImplicitParam(name = "X-Auth-Token", value = "token", required = true,
-                    dataType = "string", paramType = "header")
-    })
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "User was successfully deleted"),
-            @ApiResponse(code = 500, message = "There is no user with such id")
-    })
-    @DeleteMapping("/admin/delete_patron/{userId}")
-    public void deleteWithOrphans(@PathVariable("userId") Long id) {
-        userService.deleteUserWithOrphans(id);
-    }
-
     @ApiOperation(value = "create one user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User was successfully created"),

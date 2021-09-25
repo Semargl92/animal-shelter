@@ -3,6 +3,7 @@ package by.semargl.service;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -44,8 +45,12 @@ public class AnimalService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, rollbackFor = SQLException.class)
     public void deleteAnimal(Long id) {
         Animal animal = findOneAnimal(id);
-        animal.setKennel(null);
-        animalRepository.save(animal);
+        Optional<Kennel> kennelOptional = kennelRepository.findById(animal.getKennel().getId());
+        if (kennelOptional.isPresent()) {
+            Kennel kennel = kennelOptional.get();
+            kennel.setAnimal(null);
+            kennelRepository.save(kennel);
+        }
         animalRepository.delete(animal);
     }
 
@@ -94,15 +99,5 @@ public class AnimalService {
             throw new NoSuchEntityException("There is no animals for this patron id");
         }
         return animals;
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ, rollbackFor = SQLException.class)
-    public void updateAnimalsKennel(Long animalId, Long kennelId) {
-
-        Kennel kennel = kennelRepository.findById(kennelId)
-                .orElseThrow(() -> new NoSuchEntityException("There is no such kennel for this animal"));
-
-        findOneAnimal(animalId);
-        animalRepository.updateAnimalsKennel(animalId, kennel);
     }
 }
